@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <title>WeUI</title>
+    <link rel="stylesheet" href="/stylesheets/weui/weui.min.css"/>
+</head>
+<body>
+    <h1>Hi I am </h1>
+
+    <h3 id="menu-image">图像接口</h3>
+    <span class="desc">拍照或从手机相册中选图接口</span>
+    <button class="weui_btn weui_btn_primary" id="chooseImage">chooseImage</button>
+    <span class="desc">预览图片接口</span>
+    <button class="weui_btn weui_btn_primary" id="previewImage">previewImage</button>
+    <span class="desc">上传图片接口</span>
+    <button class="weui_btn weui_btn_primary" id="uploadImage">uploadImage</button>
+    <span class="desc">下载图片接口</span>
+    <button class="weui_btn weui_btn_primary" id="downloadImage">downloadImage</button>
+
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+
+    var currentUrl = window.location.href;
+    var configReq = new XMLHttpRequest();
+    configReq.addEventListener("load", configReqListener);
+    configReq.open("GET", "/jssdk/config?url="+currentUrl);
+    configReq.send();
+
+    function configReqListener () {
+        var jssdkConfig = JSON.parse(this.responseText);
+
+        wx.config({
+            debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+            appId: 'wx26e0fb0e11a15af4', // 必填，公众号的唯一标识
+            timestamp: jssdkConfig.timestamp, // 必填，生成签名的时间戳
+            nonceStr: jssdkConfig.nonceStr, // 必填，生成签名的随机串
+            signature: jssdkConfig.signature,// 必填，签名，见附录1
+            jsApiList: ['checkJsApi', 'closeWindow', 'chooseWXPay',
+                      'chooseImage', 'previewImage', 'uploadImage', 'downloadImage'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        });
+
+        wx.checkJsApi({
+            jsApiList: ['chooseImage', 'previewImage', 'uploadImage', 'downloadImage'], // 需要检测的JS接口列表，所有JS接口列表见附录2,
+            success: function (res) {
+              // 以键值对的形式返回，可用的api值true，不可用为false
+              // 如：{"checkResult":{"chooseImage":true},"errMsg":"checkJsApi:ok"}
+            }
+        });
+    }
+
+    wx.ready(function () {
+        // config信息验证后会执行ready方法，
+        // 所有接口调用都必须在config接口获得结果之后，config是一个客户端的异步操作，
+        // 所以如果需要在页面加载时就调用相关接口，则须把相关接口放在ready函数中调用来确保正确执行。
+        // 对于用户触发时才调用的接口，则可以直接调用，不需要放在ready函数中。
+    });
+
+    wx.error(function (res) {
+        // config信息验证失败会执行error函数，
+        // 如签名过期导致验证失败，具体错误信息可以打开config的debug模式查看，也可以在返回的res参数中查看，对于SPA可以在这里更新签名。
+    });
+
+    // 5 图片接口
+    // 5.1 拍照、本地选图
+    var images = {
+        localId: [],
+        serverId: []
+    };
+    document.querySelector('#chooseImage').onclick = function () {
+        wx.chooseImage({
+                           success: function (res) {
+                               images.localId = res.localIds;
+                               alert('已选择 ' + res.localIds.length + ' 张图片');
+                               uploadImage();
+                           }
+                       });
+    };
+
+    // 5.2 图片预览
+    document.querySelector('#previewImage').onclick = function () {
+        if (images.serverId.length == 0) {
+            alert('请先使用 chooseImage 接口选择图片 并使用 uploadImage 上传图片');
+            return;
+        }
+
+        var previewReq = new XMLHttpRequest();
+        previewReq.addEventListener("load", previewReqListener);
+        previewReq.open("GET", "/jssdk/image?serverid="+images.serverId[0]);
+        previewReq.send();
+
+        function previewReqListener () {
+            var previewObj = JSON.parse(this.responseText);
+
+            wx.previewImage({
+                current: previewObj.current,
+                urls: previewObj.urls
+            });
+        }
+
+
+    };
+
+    // 5.3 上传图片
+    document.querySelector('#uploadImage').onclick = uploadImage;
+
+    var uploadImage = function () {
+        if (images.localId.length == 0) {
+            alert('请先使用 chooseImage 接口选择图片');
+            return;
+        }
+        var i = 0, length = images.localId.length;
+        images.serverId = [];
+        function upload() {
+            wx.uploadImage({
+                               localId: images.localId[i],
+                               success: function (res) {
+                                   i++;
+                                   //alert('已上传：' + i + '/' + length);
+                                   images.serverId.push(res.serverId);
+                                   if (i < length) {
+                                       upload();
+                                   }
+                               },
+                               fail: function (res) {
+                                   alert(JSON.stringify(res));
+                               }
+                           });
+        }
+
+        upload();
+    };
+
+    // 5.4 下载图片
+    document.querySelector('#downloadImage').onclick = function () {
+        if (images.serverId.length === 0) {
+            alert('请先使用 uploadImage 上传图片');
+            return;
+        }
+        var i = 0, length = images.serverId.length;
+        images.localId = [];
+        function download() {
+            wx.downloadImage({
+                                 serverId: images.serverId[i],
+                                 success: function (res) {
+                                     i++;
+                                     alert('已下载：' + i + '/' + length);
+                                     images.localId.push(res.localId);
+                                     if (i < length) {
+                                         download();
+                                     }
+                                 }
+                             });
+        }
+
+        download();
+    };
+
+
+</script>
+</body>
+</html>
