@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
-var wechatConfig = require('wechatConfig');
+var wechatConfig = require('./wechatConfig');
 
 router.get('/', function (req, res, next) {
     var query = req.query;

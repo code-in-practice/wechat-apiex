@@ -2,8 +2,8 @@ exports.wechat = {
     appID: 'wx26e0fb0e11a15af4',
     appsecret: 'd4624c36b6795d1d99dcf0547af5443d',
     redirectUri: 'http://huanhuan.rockywu.me/user',
-    scopeUserInfo: 'http://huanhuan.rockywu.me/user',
-    scopeBase: 'http://huanhuan.rockywu.me/user',
+    scopeUserInfo: 'snsapi_userinfo',
+    scopeBase: 'snsapi_base',
     token: "rhtsjz"
 };
 
