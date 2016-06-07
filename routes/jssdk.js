@@ -8,6 +8,8 @@ router.get('/', function (req, res, next) {
 });
 
 router.get('/config', function (req, res, next) {
+    
+    
     var ticket = 'sM4AOVdWfPE4DxkXGEs8VLEm0ygun49gMArC8_GcA89WXZ23z4yjG1O9ulxtN4uSGPWSrtWVm1wvG2Fwp65LYQ';
     var url = req.query.url;
     var config = ticketSign(ticket, url);
