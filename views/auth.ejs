@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
     <title>Auth</title>
-    <link rel="stylesheet" href="/weui/style/weui.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/weui/weui.min.css"/>
 </head>
 <body ontouchstart="">
     <h1>Hei Hei</h1>
-    <a class="weui_btn weui_btn_primary" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx26e0fb0e11a15af4&redirect_uri=http%3A%2F%2Fhuanhuan.rockywu.me%2Fuser&response_type=code&scope=snsapi_userinfo&state=snsapi_userinfo#wechat_redirect">snsapi_userinfo</a>
-    <a class="weui_btn weui_btn_primary" href="https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx26e0fb0e11a15af4&redirect_uri=http%3A%2F%2Fhuanhuan.rockywu.me%2Fuser&response_type=code&scope=snsapi_base&state=snsapi_base#wechat_redirect">snsapi_base</a>
+    <a class="weui_btn weui_btn_primary" href="<%= wechatAuthUrlUserInfo %>">snsapi_userinfo</a>
+    <a class="weui_btn weui_btn_primary" href="<%= wechatAuthUrlBase %>">snsapi_base</a>
 </body>
 </html>
