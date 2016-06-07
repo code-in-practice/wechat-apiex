@@ -4,10 +4,10 @@ var router = express.Router();
 var crypto = require('crypto');
 var xml2js = require('xml2js');
 var ejs = require('ejs');
-var wechatConfig = require('../config/wechatConfig');
+var wechatConfig = require('wechatConfig');
 
 
-var token = wechatConfig.token;
+var token = wechatConfig.wechat.token;
 
 router.get('/', function (req, res) {
     res.send(echoMessage(req.query));
