@@ -2,6 +2,7 @@
  * Created by zsj on 16-6-7.
  */
 var wechatConfig = require('./wechatConfig');
+var request = require('request');
 
 exports.wechatJSAccessToken = function (code, callback) {
     var grant_type = wechatConfig.wechat.grantTypeAuthorizationCode;
