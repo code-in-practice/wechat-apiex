@@ -1,6 +1,22 @@
 var express = require('express');
 var router = express.Router();
 
+var crypto = require('crypto');
+var xml2js = require('xml2js');
+var ejs = require('ejs');
+
+
+var token = "rhtsjz";
+
+var wechatAppID = 'wx26e0fb0e11a15af4';
+var wechatAppsecret = 'd4624c36b6795d1d99dcf0547af5443d';
+var wechatRedirectUri = 'http://huanhuan.rockywu.me/user';
+var wechatAuthUrl = 'https://open.weixin.qq.com/connect/oauth2/authorize?'
+                    + 'appid=' + wechatAppID
+                    + '&redirect_uri=' + wechatRedirectUri
+                    + '&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+
+
 router.get('/', function (req, res) {
     res.send(echoMessage(req.query));
 });
