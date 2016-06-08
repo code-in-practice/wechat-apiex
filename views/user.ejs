@@ -9,17 +9,19 @@
 <body>
     <h1>Ha Ha</h1>
 
-    <%if(errMsg) {%>
+    <%if(errMsg){%>
     <div class="weui_cells_title">错误</div>
     <div class="weui_cells">
+        <% Object.keys(errMsg).forEach(function (key) { %>
         <div class="weui_cell">
             <div class="weui_cell_bd weui_cell_primary">
-                <p>error</p>
+                <p><%=key%></p>
             </div>
             <div class="weui_cell_ft">
-                <%=errMsg%>
+                <%=errMsg[key]%>
             </div>
         </div>
+        <% });%>
     </div>
     <%};%>
 
