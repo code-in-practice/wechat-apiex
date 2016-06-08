@@ -6,7 +6,11 @@ exports.wechat = {
     scopeBase: 'snsapi_base',
     token: "rhtsjz",
     grantTypeAuthorizationCode: 'authorization_code',
-    oauth2AccessTokenUrl: 'https://api.weixin.qq.com/sns/oauth2/access_token'
+    grantTypeRefreshToken: 'refresh_token',
+    urlSnsOauth2AccessToken: 'https://api.weixin.qq.com/sns/oauth2/access_token',
+    urlSnsOauth2RefreshToken: 'https://api.weixin.qq.com/sns/oauth2/refresh_token',
+    urlSnsAuth: 'https://api.weixin.qq.com/sns/auth',
+    urlSnsUserInfo: 'https://api.weixin.qq.com/sns/userinfo'
 };
 
 exports.wechatAuthUrl = function (redirectUri, scope) {

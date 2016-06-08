@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var wechatConfig = require('./wechatConfig');
-var helper = require('./helper');
+var wechatAuthHelper = require('./wechatAuthHelper');
 
 router.get('/', function (req, res, next) {
     var query = req.query;
@@ -20,9 +20,15 @@ router.get('/auth', function (req, res, next) {
 router.get('/auth/callback', function (req, res, next) {
     var query = req.query;
 
-    helper.wechatJSAccessToken(query.code, function (error, response, body) {
-        console.log(error, body);
-        res.render('user', {openid: body});
+    wechatAuthHelper.jsAccessToken(query.code, function (error, response, body) {
+        if(body.errcode){
+            res.render('user', {error: body});
+        }else {
+            wechatAuthHelper.jsUserInfo(body.access_token, body.openid, 'zh_CN', function (error, response, body) {
+                res.render('user', {user: body});
+            })
+        }
+        
     });
 
 });
