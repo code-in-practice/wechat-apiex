@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var wechatConfig = require('./wechatConfig');
-var wechatAuthHelper = require('./wechatAuthHelper');
+var wechatSnsHelper = require('./wechatSnsHelper');
 
 router.get('/', function (req, res, next) {
     console.log(req.cookies);
@@ -33,11 +33,11 @@ router.get('/auth', function (req, res, next) {
 router.get('/auth/callback', function (req, res, next) {
     var query = req.query;
 
-    wechatAuthHelper.jsAccessToken(query.code, function (error, response, body) {
+    wechatSnsHelper.jsAccessToken(query.code, function (error, response, body) {
         if(body.errcode){
             res.render('user', {errMsg: body, userInfo: {}});
         }else {
-            wechatAuthHelper.jsUserInfo(body.access_token, body.openid, 'zh_CN', function (error, response, body) {
+            wechatSnsHelper.jsUserInfo(body.access_token, body.openid, 'zh_CN', function (error, response, body) {
                 //res.render('user', {errMsg: {}, userInfo: body});
                 var maxAge = 60 * 60 * 1000;
                 res.cookie('openid', body.openid, {maxAge: maxAge});

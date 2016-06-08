@@ -19,7 +19,7 @@ exports.jsAccessToken = function (code, callback) {
         qs: {
             grant_type: wechatConfig.wechat.grantTypeAuthorizationCode,
             appid: wechatConfig.wechat.appID,
-            secret: wechatConfig.wechat.appsecret,
+            secret: wechatConfig.wechat.secret,
             code: code
         }
     };
