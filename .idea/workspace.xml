@@ -4,7 +4,6 @@
     <list default="true" id="2246e4e4-b925-45a6-bfac-160730efc61a" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/jssdk.js" afterPath="$PROJECT_DIR$/routes/jssdk.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/wechatConfig.js" afterPath="$PROJECT_DIR$/routes/wechatConfig.js" />
     </list>
     <ignored path="wechat-apiex.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,11 +25,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="jssdk.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="jssdk.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/jssdk.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="126">
-              <caret line="7" column="64" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
+              <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="173" column="2" selection-start-line="173" selection-start-column="2" selection-end-line="173" selection-end-column="2" />
               <folding />
             </state>
           </provider>
@@ -708,12 +717,12 @@
       <workItem from="1465285258939" duration="506000" />
       <workItem from="1465285780326" duration="303000" />
       <workItem from="1465286095437" duration="10022000" />
-      <workItem from="1465349433159" duration="20324000" />
+      <workItem from="1465349433159" duration="20425000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31155000" />
+    <option name="totallyTimeSpent" value="31256000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -953,14 +962,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="58" column="12" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/stylesheets/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1094,7 +1095,15 @@
     <entry file="file://$PROJECT_DIR$/routes/jssdk.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
-          <caret line="7" column="64" selection-start-line="7" selection-start-column="64" selection-end-line="7" selection-end-column="64" />
+          <caret line="7" column="76" selection-start-line="7" selection-start-column="76" selection-end-line="7" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="173" column="2" selection-start-line="173" selection-start-column="2" selection-end-line="173" selection-end-column="2" />
           <folding />
         </state>
       </provider>
