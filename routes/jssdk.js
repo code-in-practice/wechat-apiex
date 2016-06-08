@@ -4,7 +4,7 @@ var router = express.Router();
 var wechatCgiBinHelper = require('./wechatCgiBinHelper');
 
 router.get('/', function (req, res, next) {
-    var url = req.query.url;
+    var url = req.url;
     wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
         var access_token = body.access_token;
         var expires_in = body.expires_in;
