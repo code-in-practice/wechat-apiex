@@ -9,7 +9,7 @@
 <body>
     <h1>Ha Ha</h1>
 
-    <%if(errMsg){%>
+    <%if(Object.keys(errMsg).length > 0){%>
     <div class="weui_cells_title">错误</div>
     <div class="weui_cells">
         <% Object.keys(errMsg).forEach(function (key) { %>
@@ -25,7 +25,7 @@
     </div>
     <%};%>
 
-    <%if(userInfo){%>
+    <%if(Object.keys(userInfo).length > 0){%>
     <div class="weui_cells_title">用户信息</div>
     <div class="weui_cells">
         <% Object.keys(userInfo).forEach(function (key) { %>
