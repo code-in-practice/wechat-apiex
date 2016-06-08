@@ -38,7 +38,7 @@ exports.cgiBinToken = function (callback) {
     });
 };
 
-exports.cgiBinTicketJsApi = function (access_token, callback) {
+exports.cgiBinTicket = function (access_token, type, callback) {
     // 详细的文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183&token=&lang=zh_CN
     var url = wechatConfig.wechat.urlCgiBinTicket;
 
@@ -47,12 +47,43 @@ exports.cgiBinTicketJsApi = function (access_token, callback) {
         json: true,
         qs: {
             access_token: access_token,
-            type: wechatConfig.wechat.ticketTypeJsApi
+            type: type || wechatConfig.wechat.ticketTypeJsApi
         }
     };
 
     request.get(options, function (error, response, body) {
         console.log('cgiBinTicketJsApi: ', body);
+        callback(error, response, body);
+
+        // 正常情况下，微信会返回下述JSON数据包给公众号：
+        // {
+        //      "errcode":0,
+        //      "errmsg":"ok",
+        //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
+        //      "expires_in":7200 }
+
+
+        // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
+        // {"errcode":40029,"errmsg":"invalid code"}
+    });
+};
+
+
+exports.cgiBinMediaGet = function (access_token, media_id, callback) {
+    // 详细的文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183&token=&lang=zh_CN
+    var url = wechatConfig.wechat.urlCgiBinMediaGet;
+
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            access_token: access_token,
+            media_id: media_id
+        }
+    };
+
+    request.get(options, function (error, response, body) {
+        console.log('cgiBinMediaGet: ', body);
         callback(error, response, body);
 
         // 正常情况下，微信会返回下述JSON数据包给公众号：
@@ -103,7 +134,7 @@ var raw = function (args) {
  *
  * @returns
  */
-exports.cgiBinTicketJsApiSign = function (ticket, url, callback) {
+exports.cgiBinTicketSign = function (ticket, url, callback) {
     var jsapi_ticket = ticket;
     var ret = {
         jsapi_ticket: jsapi_ticket,

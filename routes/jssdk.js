@@ -10,9 +10,9 @@ router.get('/', function (req, res, next) {
     wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
         var access_token = body.access_token;
         var expires_in = body.expires_in;
-        wechatCgiBinHelper.cgiBinTicketJsApi(access_token, function (error, response, body) {
+        wechatCgiBinHelper.cgiBinTicket(access_token, function (error, response, body) {
             var ticket = body.ticket;
-            wechatCgiBinHelper.cgiBinTicketJsApiSign(ticket, url, function (config) {
+            wechatCgiBinHelper.cgiBinTicketSign(ticket, url, function (config) {
                 var jssdkConfig = config;
                 res.render('jssdk', {jssdkConfig: jssdkConfig});
             })
@@ -26,9 +26,9 @@ router.get('/config', function (req, res, next) {
     wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
         var access_token = body.access_token;
         var expires_in = body.expires_in;
-        wechatCgiBinHelper.cgiBinTicketJsApi(access_token, function (error, response, body) {
+        wechatCgiBinHelper.cgiBinTicket(access_token, function (error, response, body) {
             var ticket = body.ticket;
-            wechatCgiBinHelper.cgiBinTicketJsApiSign(ticket, url, function (config) {
+            wechatCgiBinHelper.cgiBinTicketSign(ticket, url, function (config) {
                 var jssdkConfig = config;
                 res.send(config);
             })
@@ -38,6 +38,9 @@ router.get('/config', function (req, res, next) {
 
 router.get('/image', function (req, res) {
     var serverid = req.query.serverid;
+    if(serverid instanceof Array) {
+        
+    }
     console.log('serverid: ' + serverid)
     var imageObj = {};
     imageObj.current = 'http://img3.douban.com/view/photo/photo/public/p2152117150.jpg';

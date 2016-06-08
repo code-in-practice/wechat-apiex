@@ -76,8 +76,15 @@
         }
 
         var previewReq = new XMLHttpRequest();
+        var url = '/jssdk/image?';
+        for(var i=0; i<images.serverId.length; i++) {
+            if(i>0) {
+                url += "&";
+            }
+            url += "serverid="+images.serverId[0];
+        }
         previewReq.addEventListener("load", previewReqListener);
-        previewReq.open("GET", "/jssdk/image?serverid="+images.serverId[0]);
+        previewReq.open("GET", url);
         previewReq.send();
 
         function previewReqListener () {
