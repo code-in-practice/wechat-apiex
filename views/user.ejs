@@ -32,7 +32,11 @@
                 <p><%=key%></p>
             </div>
             <div class="weui_cell_ft">
-                <%=userInfo[key]%>
+                <%if(key == 'headimgurl'){%>
+                    <img src="<%=userInfo[key]%>">
+                <%}else {%>
+                    <%=userInfo[key]%>
+                <%}%>
             </div>
         </div>
         <% });%>
