@@ -22,4 +22,17 @@ router.get('/config', function (req, res, next) {
     });
 });
 
+router.get('/image', function (req, res) {
+    var serverid = req.query.serverid;
+    console.log('serverid: ' + serverid)
+    var imageObj = {};
+    imageObj.current = 'http://img3.douban.com/view/photo/photo/public/p2152117150.jpg';
+    var urls = [];
+    urls.push('http://img3.douban.com/view/photo/photo/public/p2152117150.jpg');
+    urls.push('http://img3.douban.com/view/photo/photo/public/p2152117150.jpg');
+    imageObj.urls = urls;
+    console.log(imageObj);
+    res.send(imageObj);
+});
+
 module.exports = router;
