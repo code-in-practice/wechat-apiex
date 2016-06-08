@@ -13,7 +13,8 @@ exports.wechatJSAccessToken = function (code, callback) {
     var queryStringObj = {
         grant_type: grant_type,
         appid: appid,
-        secret: secret
+        secret: secret,
+        code: code
     };
 
     request.get({url: url, qs: queryStringObj}, function (error, response, body) {
