@@ -19,9 +19,9 @@ router.get('/auth', function (req, res, next) {
 
 router.get('/auth/callback', function (req, res, next) {
     var query = req.query;
-    console.log(query);
 
     helper.wechatJSAccessToken(query.code, function (error, response, body) {
+        console.log(error, response, body);
         res.render('user', {openid: body});
     });
 
