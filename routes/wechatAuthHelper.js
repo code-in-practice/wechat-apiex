@@ -86,6 +86,8 @@ exports.jsUserInfo = function (access_token, openid, lang, callback) {
         lang: lang || 'zh_CN'
     };
 
+    console.log("jsUserInfo.qs_obj", qs_obj);
+
     request.get({url: url, qs: qs_obj}, function (error, response, body) {
         console.log('jsUserInfo: ', body);
         callback(error, response, body);
