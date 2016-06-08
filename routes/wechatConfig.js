@@ -17,6 +17,10 @@ exports.wechat = {
     ticketTypeJsApi: 'jsapi'
 };
 
+exports.hw = {
+    maindomain: 'huanhuan.rockywu.me'
+}
+
 exports.wechatAuthUrl = function (redirectUri, scope) {
     return 'https://open.weixin.qq.com/connect/oauth2/authorize?'
            + 'appid=' + 'wx26e0fb0e11a15af4'

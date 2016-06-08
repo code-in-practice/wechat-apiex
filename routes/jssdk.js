@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
+var wechatConfig = require('./wechatConfig');
 
 var wechatCgiBinHelper = require('./wechatCgiBinHelper');
 
 router.get('/', function (req, res, next) {
-    var url =  req.protocol + '://' + req.get('host') + req.originalUrl;
+    var url =  req.protocol + '://' + wechatConfig.hw.maindomain + req.path;
     console.log("url: " + url);
     wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
         var access_token = body.access_token;
