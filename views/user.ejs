@@ -9,6 +9,7 @@
 <body>
     <h1>Ha Ha</h1>
 
+    <%if(errorMsg) {%>
     <div class="weui_cells_title">错误</div>
     <div class="weui_cells">
         <div class="weui_cell">
@@ -20,19 +21,22 @@
             </div>
         </div>
     </div>
+    <%};%>
 
+    <%if(userInfo){%>
     <div class="weui_cells_title">用户信息</div>
     <div class="weui_cells">
         <div class="weui_cell">
-            <% Object.keys(user).forEach(function (key) { %>
+            <% Object.keys(userInfo).forEach(function (key) { %>
                 <div class="weui_cell_bd weui_cell_primary">
                     <p><%key%></p>
                 </div>
                 <div class="weui_cell_ft">
-                    <%user[key]%>
+                    <%userInfo[key]%>
                 </div>
             <% });%>
         </div>
     </div>
+    <%};%>
 </body>
 </html>
