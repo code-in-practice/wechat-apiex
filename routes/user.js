@@ -5,6 +5,7 @@ var wechatConfig = require('./wechatConfig');
 var wechatAuthHelper = require('./wechatAuthHelper');
 
 router.get('/', function (req, res, next) {
+    console.log(req.cookies);
     var openid = req.cookies.openid;
     if(openid){
         res.render('user', {errMsg: {}, userInfo: {openid: openid}});
@@ -16,7 +17,7 @@ router.get('/', function (req, res, next) {
 
 
 router.get('/auth', function (req, res, next) {
-
+    console.log(req.cookies);
     var openid = req.cookies.openid;
     if(openid){
         res.redirect('/user');
