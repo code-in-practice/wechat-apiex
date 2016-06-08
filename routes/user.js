@@ -39,7 +39,7 @@ router.get('/auth/callback', function (req, res, next) {
             wechatAuthHelper.jsUserInfo(body.access_token, body.openid, 'zh_CN', function (error, response, body) {
                 //res.render('user', {errMsg: {}, userInfo: body});
                 var minute = 60 * 1000;
-                req.cookie('openid', body.openid, {maxAge: minute});
+                res.cookie('openid', body.openid, {maxAge: minute});
                 res.redirect('/user');
             })
         }
