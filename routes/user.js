@@ -5,8 +5,6 @@ var wechatConfig = require('./wechatConfig');
 var wechatAuthHelper = require('./wechatAuthHelper');
 
 router.get('/', function (req, res, next) {
-    var query = req.query;
-    console.log(query);
     res.render('user', {});
 });
 
