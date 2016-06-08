@@ -11,19 +11,20 @@ var request = require('request');
  */
 exports.jsAccessToken = function (code, callback) {
     // 详细的文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140842&token=&lang=zh_CN
-    var grant_type = wechatConfig.wechat.grantTypeAuthorizationCode;
-    var appid = wechatConfig.wechat.appID;
-    var secret = wechatConfig.wechat.appsecret;
     var url = wechatConfig.wechat.urlSnsOauth2AccessToken;
 
-    var qs_obj = {
-        grant_type: grant_type,
-        appid: appid,
-        secret: secret,
-        code: code
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            grant_type: wechatConfig.wechat.grantTypeAuthorizationCode,
+            appid: wechatConfig.wechat.appID,
+            secret: wechatConfig.wechat.appsecret,
+            code: code
+        }
     };
 
-    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+    request.get(options, function (error, response, body) {
         console.log('jsAccessToken: ', body);
         callback(error, response, body);
 
@@ -45,17 +46,19 @@ exports.jsAccessToken = function (code, callback) {
  * @param callback
  */
 exports.jsRefreshToken = function (refresh_token, callback) {
-    var grant_type = wechatConfig.wechat.grantTypeRefreshToken;
-    var appid = wechatConfig.wechat.appID;
     var url = wechatConfig.wechat.urlSnsOauth2RefreshToken;
 
-    var qs_obj = {
-        grant_type: grant_type,
-        appid: appid,
-        refresh_token: refresh_token
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            grant_type: wechatConfig.wechat.grantTypeRefreshToken,
+            appid: wechatConfig.wechat.appID,
+            refresh_token: refresh_token
+        }
     };
 
-    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+    request.get(options, function (error, response, body) {
         callback(error, response, body);
         // 正确时返回的JSON数据包如下：
         // {   "access_token":"ACCESS_TOKEN",
@@ -80,13 +83,17 @@ exports.jsRefreshToken = function (refresh_token, callback) {
 exports.jsUserInfo = function (access_token, openid, lang, callback) {
     var url = wechatConfig.wechat.urlSnsUserInfo;
 
-    var qs_obj = {
-        access_token: access_token,
-        openid: openid,
-        lang: lang || 'zh_CN'
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            access_token: access_token,
+            openid: openid,
+            lang: lang || 'zh_CN'
+        }
     };
 
-    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+    request.get(options, function (error, response, body) {
         console.log('jsUserInfo: ', body);
         callback(error, response, body);
 
@@ -106,12 +113,16 @@ exports.jsUserInfo = function (access_token, openid, lang, callback) {
 exports.jsAuth = function (access_token, openid, callback) {
     var url = wechatConfig.wechat.urlSnsAuth;
 
-    var qs_obj = {
-        openid: openid,
-        access_token: access_token
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            openid: openid,
+            access_token: access_token
+        }
     };
 
-    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+    request.get(options, function (error, response, body) {
         callback(error, response, body);
 
         // 正确的JSON返回结果：
