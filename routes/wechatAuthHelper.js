@@ -81,8 +81,8 @@ exports.jsUserInfo = function (access_token, openid, lang, callback) {
     var url = wechatConfig.wechat.urlSnsUserInfo;
 
     var qs_obj = {
-        openid: openid,
         access_token: access_token,
+        openid: openid,
         lang: lang || 'zh_CN'
     };
 
