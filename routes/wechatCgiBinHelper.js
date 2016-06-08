@@ -118,6 +118,8 @@ exports.cgiBinTicketJsApiSign = function (ticket, url, callback) {
     ret.signature = shasum.digest('hex');
     ret.appId = wechatConfig.wechat.appID;
 
+    console.log("cgiBinTicketJsApiSign: \n", ret);
+
     callback(ret);
 };
 
