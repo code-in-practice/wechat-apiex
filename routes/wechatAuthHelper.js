@@ -23,9 +23,9 @@ exports.jsAccessToken = function (code, callback) {
         code: code
     };
 
-    request.get({url: url, qs: qs_obj}, function (error, response, body) {
-        console.log('jsAccessToken: ', JSON.parse(body));
-        callback(error, response, JSON.parse(body));
+    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+        console.log('jsAccessToken: ', body);
+        callback(error, response, body);
 
         // 正确时返回的JSON数据包如下：
         // {   "access_token":"ACCESS_TOKEN",
@@ -55,8 +55,8 @@ exports.jsRefreshToken = function (refresh_token, callback) {
         refresh_token: refresh_token
     };
 
-    request.get({url: url, qs: qs_obj}, function (error, response, body) {
-        callback(error, response, JSON.parse(body));
+    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+        callback(error, response, body);
         // 正确时返回的JSON数据包如下：
         // {   "access_token":"ACCESS_TOKEN",
         //     "expires_in":7200,
@@ -86,9 +86,9 @@ exports.jsUserInfo = function (access_token, openid, lang, callback) {
         lang: lang || 'zh_CN'
     };
 
-    request.get({url: url, qs: qs_obj}, function (error, response, body) {
-        console.log('jsUserInfo: ', JSON.parse(body));
-        callback(error, response, JSON.parse(body));
+    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+        console.log('jsUserInfo: ', body);
+        callback(error, response, body);
 
         // 正确的JSON返回结果：
         // { "errcode":0,"errmsg":"ok"}
@@ -111,8 +111,8 @@ exports.jsAuth = function (access_token, openid, callback) {
         access_token: access_token
     };
 
-    request.get({url: url, qs: qs_obj}, function (error, response, body) {
-        callback(error, response, JSON.parse(body));
+    request.get({url: url, json:true, qs: qs_obj}, function (error, response, body) {
+        callback(error, response, body);
 
         // 正确的JSON返回结果：
         // { "errcode":0,"errmsg":"ok"}
