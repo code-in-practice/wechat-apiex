@@ -24,6 +24,7 @@ exports.jsAccessToken = function (code, callback) {
     };
 
     request.get({url: url, qs: qs_obj}, function (error, response, body) {
+        console.log('jsAccessToken: ', body);
         callback(error, response, body);
 
         // 正确时返回的JSON数据包如下：
@@ -86,6 +87,7 @@ exports.jsUserInfo = function (access_token, openid, lang, callback) {
     };
 
     request.get({url: url, qs: qs_obj}, function (error, response, body) {
+        console.log('jsUserInfo: ', body);
         callback(error, response, body);
 
         // 正确的JSON返回结果：

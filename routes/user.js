@@ -22,7 +22,7 @@ router.get('/auth/callback', function (req, res, next) {
 
     wechatAuthHelper.jsAccessToken(query.code, function (error, response, body) {
         if(body.errcode){
-            res.render('user', {errorMsg: body});
+            res.render('user', {errMsg: body});
         }else {
             wechatAuthHelper.jsUserInfo(body.access_token, body.openid, 'zh_CN', function (error, response, body) {
                 res.render('user', {userInfo: body});
