@@ -17,7 +17,7 @@
                 <p>error</p>
             </div>
             <div class="weui_cell_ft">
-                <%errMsg%>
+                <%=errMsg%>
             </div>
         </div>
     </div>
@@ -29,10 +29,10 @@
         <div class="weui_cell">
             <% Object.keys(userInfo).forEach(function (key) { %>
                 <div class="weui_cell_bd weui_cell_primary">
-                    <p><%key%></p>
+                    <p><%=key%></p>
                 </div>
                 <div class="weui_cell_ft">
-                    <%userInfo[key]%>
+                    <%=userInfo[key]%>
                 </div>
             <% });%>
         </div>
