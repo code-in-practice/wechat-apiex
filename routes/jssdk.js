@@ -26,11 +26,11 @@ router.get('/config', function (req, res, next) {
     wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
         var access_token = body.access_token;
         var expires_in = body.expires_in;
-        wechatCgiBinHelper.cgiBinTicket(access_token, function (error, response, body) {
+        wechatCgiBinHelper.cgiBinTicket(access_token, null, function (error, response, body) {
             var ticket = body.ticket;
             wechatCgiBinHelper.cgiBinTicketSign(ticket, url, function (config) {
                 var jssdkConfig = config;
-                res.send(config);
+                res.send(jssdkConfig);
             })
         });
     });
