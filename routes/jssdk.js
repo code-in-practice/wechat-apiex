@@ -10,6 +10,11 @@ router.get('/', function (req, res, next) {
     wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
         var access_token = body.access_token;
         var expires_in = body.expires_in;
+
+        wechatCgiBinHelper.cgiBinMessageTemplateSend(access_token, function (error, response, body) {
+            //
+        });
+
         wechatCgiBinHelper.cgiBinTicket(access_token, null, function (error, response, body) {
             var ticket = body.ticket;
             wechatCgiBinHelper.cgiBinTicketSign(ticket, url, function (config) {
@@ -49,6 +54,7 @@ router.get('/image', function (req, res) {
     urls.push('http://img3.douban.com/view/photo/photo/public/p2152117150.jpg');
     imageObj.urls = urls;
     console.log(imageObj);
+
     res.send(imageObj);
 });
 

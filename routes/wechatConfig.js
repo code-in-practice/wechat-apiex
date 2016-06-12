@@ -15,6 +15,7 @@ exports.wechat = {
     urlCgiBinToken: 'https://api.weixin.qq.com/cgi-bin/token',
     urlCgiBinTicket: 'https://api.weixin.qq.com/cgi-bin/ticket/getticket',
     urlCgiBinMediaGet: 'https://file.api.weixin.qq.com/cgi-bin/media/get',
+    urlCgiBinMessageTemplateSend: 'https://api.weixin.qq.com/cgi-bin/message/template/send',
     ticketTypeJsApi: 'jsapi'
 };
 

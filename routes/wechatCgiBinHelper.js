@@ -38,37 +38,6 @@ exports.cgiBinToken = function (callback) {
     });
 };
 
-exports.cgiBinTicket = function (access_token, type, callback) {
-    // 详细的文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183&token=&lang=zh_CN
-    var url = wechatConfig.wechat.urlCgiBinTicket;
-
-    var options = {
-        url: url,
-        json: true,
-        qs: {
-            access_token: access_token,
-            type: type || wechatConfig.wechat.ticketTypeJsApi
-        }
-    };
-
-    request.get(options, function (error, response, body) {
-        console.log('cgiBinTicketJsApi: ', body);
-        callback(error, response, body);
-
-        // 正常情况下，微信会返回下述JSON数据包给公众号：
-        // {
-        //      "errcode":0,
-        //      "errmsg":"ok",
-        //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
-        //      "expires_in":7200 }
-
-
-        // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
-        // {"errcode":40029,"errmsg":"invalid code"}
-    });
-};
-
-
 exports.cgiBinMediaGet = function (access_token, media_id, callback) {
     // 详细的文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183&token=&lang=zh_CN
     var url = wechatConfig.wechat.urlCgiBinMediaGet;
@@ -91,7 +60,7 @@ exports.cgiBinMediaGet = function (access_token, media_id, callback) {
         //      "errcode":0,
         //      "errmsg":"ok",
         //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
-        //      "expires_in":7200 }
+        // "expires_in":7200 }
 
 
         // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
@@ -154,3 +123,76 @@ exports.cgiBinTicketSign = function (ticket, url, callback) {
     callback(ret);
 };
 
+
+exports.cgiBinTicket = function (access_token, type, callback) {
+    // 详细的文档 https://mp.weixin.qq.com/wiki?t=resource/res_main&id=mp1421140183&token=&lang=zh_CN
+    var url = wechatConfig.wechat.urlCgiBinTicket;
+
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            access_token: access_token,
+            type: type || wechatConfig.wechat.ticketTypeJsApi
+        }
+    };
+
+    request.get(options, function (error, response, body) {
+        console.log('cgiBinTicketJsApi: ', body);
+        callback(error, response, body);
+
+        // 正常情况下，微信会返回下述JSON数据包给公众号：
+        // {
+        //      "errcode":0,
+        //      "errmsg":"ok",
+        //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
+        // "expires_in":7200 }
+
+
+        // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
+        // {"errcode":40029,"errmsg":"invalid code"}
+    });
+};
+
+
+/******************************************** 模板消息 *****************************************/
+
+exports.cgiBinMessageTemplateSend = function (access_token, callback) {
+    var url = wechatConfig.wechat.urlCgiBinMessageTemplateSend;
+
+    var body = {
+        touser:"o3YkquL-MhaM-V8kZtSiWWk6cV0E",
+        template_id:"D_NKj8KZXccrzeX4zYI6vT-xlLpvzXrSDifraF7L3z0",
+        url:"http://www.zcool.com.cn",
+        data: {
+            remark: "有人给你画画了"
+        }
+    };
+
+    var options = {
+        url: url,
+        json: true,
+        qs: {
+            access_token: access_token
+        },
+        body: body
+    };
+
+
+
+    request.post(options, function (error, response, body) {
+        console.log('cgiBinMessageTemplateSend: ', body);
+        callback(error, response, body);
+
+        // 正常情况下，微信会返回下述JSON数据包给公众号：
+        // {
+        //      "errcode":0,
+        //      "errmsg":"ok",
+        //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
+        // "expires_in":7200 }
+
+
+        // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
+        // {"errcode":40029,"errmsg":"invalid code"}
+    });
+};
