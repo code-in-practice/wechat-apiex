@@ -7,32 +7,20 @@ var wechatCgiBinHelper = require('./wechatCgiBinHelper');
 router.get('/', function (req, res, next) {
     var url =  req.protocol + '://' + wechatConfig.hw.maindomain + req.originalUrl;
     console.log("url: " + url);
-    wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
-        var access_token = body.access_token;
-        var expires_in = body.expires_in;
-        wechatCgiBinHelper.cgiBinTicket(access_token, function (error, response, body) {
-            var ticket = body.ticket;
-            wechatCgiBinHelper.cgiBinTicketSign(ticket, url, function (config) {
-                var jssdkConfig = config;
-                res.render('jssdk', {jssdkConfig: jssdkConfig});
-            })
-        });
+
+    wechatCgiBinHelper.cgiBinJsSdkConfig(url, function (jssdkConfig) {
+        res.render('jssdk', {jssdkConfig: jssdkConfig});
     });
     
 });
 
+/**
+ * ajax config
+ */
 router.get('/config', function (req, res, next) {
     var url = req.query.url;
-    wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
-        var access_token = body.access_token;
-        var expires_in = body.expires_in;
-        wechatCgiBinHelper.cgiBinTicket(access_token, function (error, response, body) {
-            var ticket = body.ticket;
-            wechatCgiBinHelper.cgiBinTicketSign(ticket, url, function (config) {
-                var jssdkConfig = config;
-                res.send(config);
-            })
-        });
+    wechatCgiBinHelper.cgiBinJsSdkConfig(url, function (jssdkConfig) {
+        res.send(jssdkConfig);
     });
 });
 
