@@ -11,14 +11,15 @@ router.get('/', function (req, res, next) {
     wechatCgiBinHelper.cgiBinJsSdkConfig(url, function (jssdkConfig) {
         res.render('jssdk', {jssdkConfig: jssdkConfig});
     });
-    
+
 });
 
 /**
  * ajax config
  */
 router.get('/config', function (req, res, next) {
-    var url = req.query.url;
+    var url =  req.protocol + '://' + wechatConfig.hw.maindomain + req.originalUrl;
+    console.log("url: " + url);
     wechatCgiBinHelper.cgiBinJsSdkConfig(url, function (jssdkConfig) {
         res.send(jssdkConfig);
     });
