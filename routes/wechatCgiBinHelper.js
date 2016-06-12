@@ -4,6 +4,7 @@
 var wechatConfig = require('./wechatConfig');
 var request = require('request');
 var crypto = require('crypto');
+var fs = require('fs');
 
 /**
  * @synopsis 获取多媒体文件
