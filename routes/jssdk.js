@@ -41,15 +41,22 @@ router.get('/image', function (req, res) {
     if(serverid instanceof Array) {
         
     }
-    console.log('serverid: ' + serverid)
+    console.log('serverid: ' + serverid);
     var imageObj = {};
-    imageObj.current = 'http://img3.douban.com/view/photo/photo/public/p2152117150.jpg';
-    var urls = [];
-    urls.push('http://img3.douban.com/view/photo/photo/public/p2152117150.jpg');
-    urls.push('http://img3.douban.com/view/photo/photo/public/p2152117150.jpg');
-    imageObj.urls = urls;
-    console.log(imageObj);
-    res.send(imageObj);
+    wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
+        var access_token = body.access_token;
+        var current = wechatConfig.wechat.urlCgiBinMediaGet + '?access_token=' + access_token + '&media_id=' + serverid;
+
+        imageObj.current = current;
+        var urls = [];
+        urls.push(current);
+        urls.push(current);
+        imageObj.urls = urls;
+        console.log(imageObj);
+        res.send(imageObj);
+    });
+
+
 });
 
 module.exports = router;
