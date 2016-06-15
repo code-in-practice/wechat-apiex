@@ -4,6 +4,7 @@
 var wechatConfig = require('./wechatConfig');
 var request = require('request');
 var crypto = require('crypto');
+var fs = require('fs');
 
 /**
  * 获取access_token
@@ -51,21 +52,15 @@ exports.cgiBinMediaGet = function (access_token, media_id, callback) {
         }
     };
 
-    request.get(options, function (error, response, body) {
-        console.log('cgiBinMediaGet: ', body);
-        callback(error, response, body);
+    request.get(options).on('response', function (res) {
+        console.log(res.statusCode);
+        console.log(res.headers);
+    }).pipe(fs.createWriteStream(media_id+'.jpg'));
 
-        // 正常情况下，微信会返回下述JSON数据包给公众号：
-        // {
-        //      "errcode":0,
-        //      "errmsg":"ok",
-        //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
-        // "expires_in":7200 }
-
-
-        // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
-        // {"errcode":40029,"errmsg":"invalid code"}
-    });
+    // request.get(options, function (error, response, body) {
+    //     console.log('cgiBinMediaGet: ', body);
+    //     callback(error, response, body);
+    // });
 };
 
 /********************************************jsapi相关*****************************************/
@@ -81,7 +76,7 @@ var createTimestamp = function () {
 
 var raw = function (args) {
     var keys = Object.keys(args);
-    keys = keys.sort()
+    keys = keys.sort();
     var newArgs = {};
     keys.forEach(function (key) {
         newArgs[key.toLowerCase()] = args[key];
@@ -183,16 +178,5 @@ exports.cgiBinMessageTemplateSend = function (access_token, callback) {
     request.post(options, function (error, response, body) {
         console.log('cgiBinMessageTemplateSend: ', body);
         callback(error, response, body);
-
-        // 正常情况下，微信会返回下述JSON数据包给公众号：
-        // {
-        //      "errcode":0,
-        //      "errmsg":"ok",
-        //      "ticket":"bxLdikRXVbTPdHSM05e5u5sUoXNKd8-41ZO3MhKoyN5OfkWITDGgnr2fwJ0m9E8NYzWKVZvdVtaUgWvsdshFKA",
-        // "expires_in":7200 }
-
-
-        // 错误时微信会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误）:
-        // {"errcode":40029,"errmsg":"invalid code"}
     });
 };

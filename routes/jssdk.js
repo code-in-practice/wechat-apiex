@@ -46,6 +46,12 @@ router.get('/image', function (req, res) {
     if(serverid instanceof Array) {
         
     }
+    wechatCgiBinHelper.cgiBinToken(function (error, response, body) {
+        var access_token = body.access_token;
+        wechatCgiBinHelper.cgiBinMediaGet(access_token, serverid, function (error, response, body) {
+        });
+    });
+    
     console.log('serverid: ' + serverid);
     var imageObj = {};
     imageObj.current = 'http://img3.douban.com/view/photo/photo/public/p2152117150.jpg';
